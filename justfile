@@ -1,7 +1,7 @@
 # Handy sets of commands to run side operations usually described in the doc otherwise
 # expects podman and quarkus CLI
 
-postgres := "postgres:15-bullseye"
+postgres := "postgres:18.1"
 
 # Detect which container runtime is available
 container_runtime := `command -v docker >/dev/null 2>&1 && echo "docker" || echo "podman"`
@@ -19,7 +19,6 @@ start-infra:
 # Stop the database using podman or docker
 stop-infra:
     {{container_runtime}} stop $({{container_runtime}} ps -q --filter ancestor={{postgres}})
-
 # Show which container runtime will be used
 show-runtime:
     @echo "Using container runtime: {{container_runtime}}"
@@ -27,3 +26,4 @@ show-runtime:
 #Using quarkus CLI, build in native
 native:
     quarkus build --no-tests --native
+
