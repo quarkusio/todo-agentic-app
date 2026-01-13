@@ -145,11 +145,11 @@ public class AgentProducers {
                                     var status = taskStatusUpdateEvent.getStatus();
                                     Log.infov( "Received status-update: {0} ", status.state());
                                     agentsMediator.sendToActivityLog(taskStatusUpdateEvent);
-                                    if (taskStatusUpdateEvent.isFinal()) {
-                                        agentsMediator.sendArtifacts(taskUpdateEvent.getTask());
-                                    }
-                                    else if (status.state() == TaskState.INPUT_REQUIRED) {
+                                    if (status.state() == TaskState.INPUT_REQUIRED) {
                                         agentsMediator.sendInputRequired(taskStatusUpdateEvent.getTaskId(), status);
+                                    }
+                                    else if (taskStatusUpdateEvent.isFinal()) {
+                                        agentsMediator.sendArtifacts(taskUpdateEvent.getTask());
                                     }
                                 }
                                 case TaskArtifactUpdateEvent taskArtifactUpdateEvent -> {

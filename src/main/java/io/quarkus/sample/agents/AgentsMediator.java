@@ -194,7 +194,7 @@ public class AgentsMediator {
         var context = contextsHolder.getContextFromTaskId(task.getId());
         StringBuilder textBuilder = new StringBuilder();
         List<Artifact> artifacts = task.getArtifacts();
-        if (artifacts != null) {
+        if (artifacts != null && artifacts.size() > 0) {
             for (Artifact artifact : artifacts) {
                 textBuilder.append(extractTextFromParts(artifact.parts()));
             }
